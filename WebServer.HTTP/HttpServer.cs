@@ -64,7 +64,7 @@ namespace WebServer.HTTP
                 
                 Console.WriteLine(requestAsString);
                 HttpResponse response;
-                var route = this.routeTable.FirstOrDefault(x => x.Path == request.Path);
+                var route = this.routeTable.FirstOrDefault(x => string.Compare(x.Path,request.Path,true) == 0);
                 if (route!=null)
                 {
                     response = route.Action(request);
