@@ -1,23 +1,18 @@
 ﻿using System.Text;
 using WebServer.HTTP;
+using WebServer.MvcFramework;
 
 namespace MyFirstMvcApp.Controllers
 {
-    public class UsersController
+    public class UsersController:Controller
     {
         public HttpResponse Login(HttpRequest arg)
         {
-            var responseHtml = "<h1>Login...</h1>";
-            var responseBody = Encoding.UTF8.GetBytes(responseHtml);
-            var response = new HttpResponse("text/html", responseBody);
-            return response;
+            return this.View();
         }
         public HttpResponse Register(HttpRequest arg)
         {
-            var responseHtml = "<h1>Register...</h1>";
-            var responseBody = Encoding.UTF8.GetBytes(responseHtml);
-            var response = new HttpResponse("text/html", responseBody);
-            return response;
+            return this.View();
         }
     }
 }
