@@ -3,7 +3,7 @@ using WebServer.MvcFramework;
 
 namespace MyFirstMvcApp.Controllers
 {
-    public class CardsControllers:Controller
+    public class CardsController:Controller
     {
         public HttpResponse Add(HttpRequest request)
         {

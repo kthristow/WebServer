@@ -6,7 +6,7 @@ namespace MyFirstMvcApp
 {
     public class Program
     {
-        public static object BootstrapJs { get; private set; }
+       
 
         static async Task Main(string[] args)
         {
@@ -15,9 +15,9 @@ namespace MyFirstMvcApp
      
             routeTable.Add(new Route("/users/login", new UsersController().Login));
             routeTable.Add(new Route("/users/register", new UsersController().Register));
-            routeTable.Add(new Route("/cards/all", new CardsControllers().All));
-            routeTable.Add(new Route("/cards/add", new CardsControllers().Add));
-            routeTable.Add(new Route("/cards/colleciton", new CardsControllers().Collection));
+            routeTable.Add(new Route("/cards/all", new CardsController().All));
+            routeTable.Add(new Route("/cards/add", new CardsController().Add));
+            routeTable.Add(new Route("/cards/colleciton", new CardsController().Collection));
 
             routeTable.Add(new Route("/favicon.ico", new StaticFilesController().Favicon));
             routeTable.Add(new Route("/css/bootstrap.min.css", new StaticFilesController().BootstrapCss));
