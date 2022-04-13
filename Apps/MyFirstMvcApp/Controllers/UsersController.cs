@@ -14,5 +14,15 @@ namespace MyFirstMvcApp.Controllers
         {
             return this.View();
         }
+
+        public HttpResponse DoLogin(HttpRequest arg)
+        {
+            //read data
+            //check user
+            //log user
+            //redirect
+
+            return this.Redirect("/");
+        }
     }
 }

@@ -4,6 +4,12 @@ namespace WebServer.HTTP
 {
     public class HttpResponse
     {
+        public HttpResponse(HttpStatusCode statusCode)
+        {
+            this.StatusCode = statusCode;
+            this.Headers = new List<Header>();
+            this.Cookies = new List<Cookie>();
+        }
         public HttpResponse(string contentType,byte[] body,HttpStatusCode httpStatusCode=HttpStatusCode.Ok)
         {
             if(body == null)
@@ -20,6 +26,7 @@ namespace WebServer.HTTP
             };
             this.Cookies=new List<Cookie>();
         }
+     
         public override string ToString()
         {
             StringBuilder responseBuilder=new StringBuilder();
