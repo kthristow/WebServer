@@ -1,23 +1,14 @@
 ﻿<h1>Hello</h1>
 <ul>
-    @for (int i=1;i<= 10;i+=2)
-    {
-    @if(i%3==0)
-    {
-    <li>@i</li>
-    }
-    }
-</ul>
-@if(DateTime.UtcNow.Year>=2000)
+@for (int i = 1; i <= 20; i += 2)
 {
-    <h2>Welcome in @DateTime.UtcNow.Year! </h2>
+    @if (i % 3 == 0)
+    {
+       <li>@i</li>
+    }
 }
-
-
-<h1>Hello</h1>
-<ul>
-    <li>3</li>
-    <li>9</li>
-    <li>15</li>
 </ul>
-     <h2>Welcome in 2020 !</h2>
+@if (DateTime.UtcNow.Year >= 2020)
+{
+    <h2>Welcome in @DateTime.UtcNow.Year !</h2>
+}

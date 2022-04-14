@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{EE36DA45-8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFirstMvcApp", "Apps\MyFirstMvcApp\MyFirstMvcApp.csproj", "{94BC3EFC-871D-42CE-A90B-552743305B15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SUS.MvcFramework.Tests", "SUS.MvcFramework.Tests\SUS.MvcFramework.Tests.csproj", "{CC1FE60C-DFBE-47A0-BD36-8A4E0F9EA9F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServer.MvcFramework.Tests", "SUS.MvcFramework.Tests\WebServer.MvcFramework.Tests.csproj", "{CC1FE60C-DFBE-47A0-BD36-8A4E0F9EA9F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

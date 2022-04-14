@@ -1,20 +1,31 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Text;
 using WebServer.HTTP;
+using WebServer.MvcFramework.ViewEngine;
 
 namespace WebServer.MvcFramework
 {
     public abstract class Controller
     {
-        public HttpResponse View([CallerMemberName]string viewPath=null)
+        private SusViewEngine viewEngine;
+
+        public Controller()
+        {
+            this.viewEngine = new SusViewEngine();
+        }
+        public HttpResponse View(object viewModel=null,[CallerMemberName]string viewPath=null)
         {
             var layout = System.IO.File
-                .ReadAllText("Views/Shared/_Layout.html");
+                .ReadAllText("Views/Shared/_Layout.cshtml");
+            layout = layout.Replace("@RenderBody()", "____VIEW_GOES_HERE____");
+            layout = this.viewEngine.GetHtml(layout, viewModel);
 
             var viewContent =
                 System.IO.File
-                .ReadAllText("Views/"+this.GetType().Name.Replace("Controller",string.Empty)+"/"+viewPath+".html");
-            var responseHtml = layout.Replace("@RenderBody()", viewContent);
+                .ReadAllText("Views/"+this.GetType().Name.Replace("Controller",string.Empty)+"/"+viewPath+".cshtml");
+            viewContent = this.viewEngine.GetHtml(viewContent, viewModel);
+
+            var responseHtml = layout.Replace("____VIEW_GOES_HERE____", viewContent);
             var responseBody = Encoding.UTF8.GetBytes(responseHtml);
             var response = new HttpResponse("text/html", responseBody);
             return response;
