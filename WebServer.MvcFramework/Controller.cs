@@ -9,10 +9,12 @@ namespace WebServer.MvcFramework
     {
         private SusViewEngine viewEngine;
 
+       
         public Controller()
         {
             this.viewEngine = new SusViewEngine();
         }
+         public HttpRequest Request { get; set; }
         public HttpResponse View(object viewModel=null,[CallerMemberName]string viewPath=null)
         {
             var layout = System.IO.File

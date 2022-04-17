@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using MyFirstMvcApp.ViewModels;
+using System.Text;
 using WebServer.HTTP;
 using WebServer.MvcFramework;
 
@@ -6,7 +7,16 @@ namespace MyFirstMvcApp.Controllers
 {
     public class HomeController:Controller
     { 
-        public HttpResponse Index(HttpRequest arg)
+        [HttpGet("/")]
+        public HttpResponse Index()
+        {
+            var viewModel = new IndexViewModel();
+            viewModel.CurrentYear = DateTime.UtcNow.Year;
+            viewModel.Message = "Welcome to Battle Cards";
+            return this.View(viewModel);
+        }
+
+        public HttpResponse About()
         {
             return this.View();
         }
