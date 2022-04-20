@@ -2,14 +2,17 @@
 using WebServer.HTTP;
 using WebServer.MvcFramework;
 
-namespace MyFirstMvcApp.Controllers
+namespace BattleCards.Controllers
 {
-    public class UsersController:Controller
+    public class UsersController : Controller
     {
+        // GET /users/login
         public HttpResponse Login()
         {
             return this.View();
         }
+
+        // GET /users/register
         public HttpResponse Register()
         {
             return this.View();
@@ -18,11 +21,9 @@ namespace MyFirstMvcApp.Controllers
         [HttpPost]
         public HttpResponse DoLogin()
         {
-            //read data
-            //check user
-            //log user
-            //redirect
-
+            // TODO: read data
+            // TODO: check user
+            // TODO: log user
             return this.Redirect("/");
         }
     }

@@ -1,13 +1,14 @@
-﻿using MyFirstMvcApp.Controllers;
+﻿
 using WebServer.HTTP;
 using WebServer.MvcFramework;
 
-namespace MyFirstMvcApp
+namespace BattleCards
 {
     public class Program
     {
-        static async Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
+            // TODO: <Startup>
             await Host.CreateHostAsync(new StartUp(), 80);
         }
     }

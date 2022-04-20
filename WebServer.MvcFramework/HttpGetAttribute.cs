@@ -1,17 +1,17 @@
-﻿using HttpMethod = WebServer.HTTP.HttpMethod;
-
+﻿
 namespace WebServer.MvcFramework
 {
     public class HttpGetAttribute : BaseHttpAttribute
     {
         public HttpGetAttribute()
         {
-
         }
+
         public HttpGetAttribute(string url)
         {
-            this.Url=url;   
+            this.Url = url;
         }
-        public override HttpMethod Method => HttpMethod.Get;
+
+        public override HTTP.HttpMethod Method => HTTP.HttpMethod.Get;
     }
 }

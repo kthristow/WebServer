@@ -2,8 +2,6 @@
 {
     public interface IHttpServer
     {
-         Task StartAsync(int port);
-
-        
+        Task StartAsync(int port);
     }
 }

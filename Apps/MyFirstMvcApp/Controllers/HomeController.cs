@@ -1,12 +1,13 @@
-﻿using MyFirstMvcApp.ViewModels;
+﻿
+using BattleCards.ViewModels;
 using System.Text;
 using WebServer.HTTP;
 using WebServer.MvcFramework;
 
-namespace MyFirstMvcApp.Controllers
+namespace BattleCards.Controllers
 {
-    public class HomeController:Controller
-    { 
+    public class HomeController : Controller
+    {
         [HttpGet("/")]
         public HttpResponse Index()
         {
@@ -16,6 +17,7 @@ namespace MyFirstMvcApp.Controllers
             return this.View(viewModel);
         }
 
+        // GET /home/about
         public HttpResponse About()
         {
             return this.View();

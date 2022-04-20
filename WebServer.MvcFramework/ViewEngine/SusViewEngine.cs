@@ -15,35 +15,29 @@ namespace WebServer.MvcFramework.ViewEngine
     {
         public string GetHtml(string templateCode, object viewModel)
         {
-            string csharpCode = GenerateCSharpFromTemplate(templateCode,viewModel);
+            string csharpCode = GenerateCSharpFromTemplate(templateCode, viewModel);
             IView executableObject = GenerateExecutableCоde(csharpCode, viewModel);
             string html = executableObject.ExecuteTemplate(viewModel); // M
             return html;
         }
 
-        private string GenerateCSharpFromTemplate(string templateCode,object viewModel)
+        private string GenerateCSharpFromTemplate(string templateCode, object viewModel)
         {
-            string typeModel = "object";
-           if(viewModel!=null)
+            string typeOfModel = "object";
+            if (viewModel != null)
             {
                 if (viewModel.GetType().IsGenericType)
                 {
-                    var modelName=  viewModel.GetType().FullName;
+                    var modelName = viewModel.GetType().FullName;
                     var genericArguments = viewModel.GetType().GenericTypeArguments;
-                    typeModel = modelName.Substring(0, modelName.IndexOf('`'))
+                    typeOfModel = modelName.Substring(0, modelName.IndexOf('`'))
                         + "<" + string.Join(",", genericArguments.Select(x => x.FullName)) + ">";
-
                 }
                 else
                 {
-                    typeModel=viewModel.GetType().FullName;
+                    typeOfModel = viewModel.GetType().FullName;
                 }
             }
-            
-
-           
-
-
 
             string csharpCode = @"
 using System;
@@ -57,7 +51,7 @@ namespace ViewNamespace
     {
         public string ExecuteTemplate(object viewModel)
         {
-            var Model = viewModel as " +typeModel+@";
+            var Model = viewModel as " + typeOfModel + @";
             var html = new StringBuilder();
             " + GetMethodBody(templateCode) + @"
             return html.ToString();
@@ -65,20 +59,19 @@ namespace ViewNamespace
     }
 }
 ";
-
             return csharpCode;
         }
 
         private string GetMethodBody(string templateCode)
         {
             Regex csharpCodeRegex = new Regex(@"[^\""\s&\'\<]+");
-            var supportedOperators = new List<string>() { "for", "else","while","if","foreach" };
+            var supportedOperators = new List<string> { "for", "while", "if", "else", "foreach" };
             StringBuilder csharpCode = new StringBuilder();
             StringReader sr = new StringReader(templateCode);
             string line;
             while ((line = sr.ReadLine()) != null)
             {
-                if (supportedOperators.Any(x=>line.TrimStart().StartsWith("@"+x)))
+                if (supportedOperators.Any(x => line.TrimStart().StartsWith("@" + x)))
                 {
                     var atSignLocation = line.IndexOf("@");
                     line = line.Remove(atSignLocation, 1);
@@ -108,7 +101,7 @@ namespace ViewNamespace
                 }
             }
 
-            return csharpCode.ToString().Trim();
+            return csharpCode.ToString();
         }
 
         private IView GenerateExecutableCоde(string csharpCode, object viewModel)
@@ -139,11 +132,11 @@ namespace ViewNamespace
                 EmitResult result = compileResult.Emit(memoryStream);
                 if (!result.Success)
                 {
-                    // Compile errors!!!!
                     return new ErrorView(result.Diagnostics
                         .Where(x => x.Severity == DiagnosticSeverity.Error)
                         .Select(x => x.GetMessage()), csharpCode);
                 }
+
                 try
                 {
                     memoryStream.Seek(0, SeekOrigin.Begin);
@@ -151,14 +144,13 @@ namespace ViewNamespace
                     var assembly = Assembly.Load(byteAssembly);
                     var viewType = assembly.GetType("ViewNamespace.ViewClass");
                     var instance = Activator.CreateInstance(viewType);
-                    return instance as IView;
+                    return (instance as IView)
+                        ?? new ErrorView(new List<string> { "Instance is null!" }, csharpCode);
                 }
                 catch (Exception ex)
                 {
                     return new ErrorView(new List<string> { ex.ToString() }, csharpCode);
-                   
                 }
-               
             }
         }
     }

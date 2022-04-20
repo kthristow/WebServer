@@ -1,4 +1,4 @@
-﻿using HttpMethod = WebServer.HTTP.HttpMethod;
+﻿
 
 namespace WebServer.MvcFramework
 {
@@ -6,12 +6,13 @@ namespace WebServer.MvcFramework
     {
         public HttpPostAttribute()
         {
-
         }
+
         public HttpPostAttribute(string url)
         {
             this.Url = url;
         }
-        public override HttpMethod Method =>HttpMethod.Post;
+
+        public override HTTP.HttpMethod Method => HTTP.HttpMethod.Post;
     }
 }

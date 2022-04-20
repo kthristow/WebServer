@@ -1,8 +1,9 @@
-﻿using MyFirstMvcApp.Controllers;
+﻿using BattleCards.Data;
+using Microsoft.EntityFrameworkCore;
 using WebServer.HTTP;
 using WebServer.MvcFramework;
 
-namespace MyFirstMvcApp
+namespace BattleCards
 {
     public class StartUp : IMvcApplication
     {
@@ -12,8 +13,7 @@ namespace MyFirstMvcApp
 
         public void Configure(List<Route> routeTable)
         {
-           
-
+            new ApplicationDbContext().Database.Migrate();
         }
     }
 }
