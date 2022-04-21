@@ -67,7 +67,10 @@ namespace WebServer.HTTP
             }
             else if (!Sessions.ContainsKey(sessionCookie.Value))
             {
-
+                
+                this.Session = new Dictionary<string, string>();
+                Sessions.Add(sessionCookie.Value, this.Session);
+               ;
             }
             else
             {
