@@ -71,6 +71,9 @@ namespace BattleCards.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -86,15 +89,12 @@ namespace BattleCards.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CardId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("CardId1")
+                    b.Property<int>("CardId")
                         .HasColumnType("int");
 
                     b.HasKey("UserId", "CardId");
 
-                    b.HasIndex("CardId1");
+                    b.HasIndex("CardId");
 
                     b.ToTable("UserCards");
                 });
@@ -103,7 +103,7 @@ namespace BattleCards.Migrations
                 {
                     b.HasOne("BattleCards.Data.Card", "Card")
                         .WithMany("Users")
-                        .HasForeignKey("CardId1")
+                        .HasForeignKey("CardId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

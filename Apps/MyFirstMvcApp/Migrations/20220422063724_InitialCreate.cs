@@ -33,7 +33,8 @@ namespace BattleCards.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,15 +46,14 @@ namespace BattleCards.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CardId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CardId1 = table.Column<int>(type: "int", nullable: false)
+                    CardId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserCards", x => new { x.UserId, x.CardId });
                     table.ForeignKey(
-                        name: "FK_UserCards_Cards_CardId1",
-                        column: x => x.CardId1,
+                        name: "FK_UserCards_Cards_CardId",
+                        column: x => x.CardId,
                         principalTable: "Cards",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -66,9 +66,9 @@ namespace BattleCards.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserCards_CardId1",
+                name: "IX_UserCards_CardId",
                 table: "UserCards",
-                column: "CardId1");
+                column: "CardId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
