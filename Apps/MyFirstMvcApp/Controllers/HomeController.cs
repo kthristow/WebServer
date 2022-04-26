@@ -11,10 +11,8 @@ namespace BattleCards.Controllers
         [HttpGet("/")]
         public HttpResponse Index()
         {
-            var viewModel = new IndexViewModel();
-            viewModel.CurrentYear = DateTime.UtcNow.Year;
-            viewModel.Message = "Welcome to Battle Cards";
-            return this.View(viewModel);
+            
+            return this.View();
         }
 
         // GET /home/about

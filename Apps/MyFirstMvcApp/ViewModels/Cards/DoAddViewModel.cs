@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BattleCards.ViewModels
+namespace BattleCards.ViewModels.Cards
 {
     public class DoAddViewModel
     {
