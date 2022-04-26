@@ -8,6 +8,12 @@ namespace BattleCards.Controllers
 {
     public class CardsController : Controller
     {
+        private readonly ApplicationDbContext db;
+
+        public CardsController(ApplicationDbContext db)
+        {
+               this.db = db;
+        }
         // GET /cards/add
         public HttpResponse Add()
         {
@@ -21,14 +27,14 @@ namespace BattleCards.Controllers
         [HttpPost("/Cards/Add")]
         public HttpResponse DoAdd()
         {
-            var dbContext = new ApplicationDbContext();
+          
             if (this.Request.FormData["name"].Length < 5)
             {
                 return this.Error("Name should be at least 5 chars");
             }
 
 
-            dbContext.Add(new Card
+            db.Add(new Card
             {
                 Attack = int.Parse(this.Request.FormData["attack"]),
                 Health = int.Parse(this.Request.FormData["health"]),
@@ -37,7 +43,7 @@ namespace BattleCards.Controllers
                 ImageUrl=this.Request.FormData["image"],
                 Keyword=this.Request.FormData["keyword"]
             });
-           dbContext.SaveChanges();
+            db.SaveChanges();
 
             return this.Redirect("/Cards/All");
         }
@@ -48,7 +54,7 @@ namespace BattleCards.Controllers
             {
                 return this.Redirect("/Users/Login");
             }
-            var db=new ApplicationDbContext();
+            
             var cardsViewModel = db.Cards.Select(x => new CardViewModel
             {
                 Name = x.Name,

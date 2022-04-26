@@ -7,9 +7,9 @@ namespace BattleCards.Services
     public class UserService : IUsersService
     {
         private readonly ApplicationDbContext db;
-        public UserService()
+        public UserService(ApplicationDbContext db)
         {
-            this.db = new ApplicationDbContext();
+            this.db = db;
         }
         public string CreateUsers(string username, string email, string password)
         {
