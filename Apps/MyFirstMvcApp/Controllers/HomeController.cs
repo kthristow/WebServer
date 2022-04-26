@@ -18,9 +18,5 @@ namespace BattleCards.Controllers
         }
 
         // GET /home/about
-        public HttpResponse About()
-        {
-            return this.View();
-        }
     }
 }

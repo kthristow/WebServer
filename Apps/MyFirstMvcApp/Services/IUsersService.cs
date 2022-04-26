@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BattleCards.Services
+﻿namespace BattleCards.Services
 {
-    internal class IUsersService
+    public interface IUsersService
     {
+        string CreateUsers(string username,string email, string password);
+
+        string GetUserId(string username,string password);
+
+        bool isUsernameAvailable(string username);
+
+        bool isEmailAvailable(string email);
     }
 }

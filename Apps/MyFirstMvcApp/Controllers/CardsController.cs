@@ -11,6 +11,10 @@ namespace BattleCards.Controllers
         // GET /cards/add
         public HttpResponse Add()
         {
+            if (!this.isUserSignedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
             return this.View();
         }
 
@@ -35,11 +39,15 @@ namespace BattleCards.Controllers
             });
            dbContext.SaveChanges();
 
-            return this.Redirect("/");
+            return this.Redirect("/Cards/All");
         }
         // /cards/all
         public HttpResponse All()
         {
+            if (!this.isUserSignedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
             var db=new ApplicationDbContext();
             var cardsViewModel = db.Cards.Select(x => new CardViewModel
             {
@@ -57,6 +65,11 @@ namespace BattleCards.Controllers
         // /cards/collection
         public HttpResponse Collection()
         {
+
+            if (!this.isUserSignedIn())
+            {
+                return this.Redirect("/Users/Login");
+            }
             return this.View();
         }
     }
