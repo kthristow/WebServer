@@ -11,6 +11,10 @@ namespace BattleCards.Controllers
         [HttpGet("/")]
         public HttpResponse Index()
         {
+            if (this.isUserSignedIn())
+            {
+                return Redirect("/Cards/All");
+            }
             
             return this.View();
         }

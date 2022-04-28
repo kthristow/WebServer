@@ -25,8 +25,8 @@ namespace BattleCards.Controllers
             return this.View();
         }
 
-        [HttpPost("/Users/Login")]
-        public HttpResponse DoLogin(string username,string password)
+        [HttpPost]
+        public HttpResponse Login(string username,string password)
         {
            
             var userId = this.userService.GetUserId(username, password);
@@ -43,8 +43,8 @@ namespace BattleCards.Controllers
         {
             return this.View();
         }
-        [HttpPost("/Users/Register")]
-        public HttpResponse DoRegister(string username, string email, string password, string confirmPassword)
+        [HttpPost]
+        public HttpResponse Register(string username, string email, string password, string confirmPassword)
         {
             
 
